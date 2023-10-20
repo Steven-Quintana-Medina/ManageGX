@@ -1,7 +1,7 @@
 const createError = require("http-errors");
 
 const error404Handler = (req, res, next) => {
-  next(createError(404));
+  next(createError(404,'recourse not found'));
 };
 
 const errorHandler = (err, req, res) => {

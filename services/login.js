@@ -5,10 +5,7 @@ const jwt = require("jsonwebtoken");
 const config = require("config");
 
 router.post("/", async (req, res) => {
-  const user = await dao.getUser({
-    email: req.body.email,
-    password: req.body.password,
-  });
+  const user = await dao.getUserByEmail({email: req.body.email});
 
   try {
     if (user) {

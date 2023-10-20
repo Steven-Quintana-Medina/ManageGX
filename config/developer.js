@@ -14,11 +14,4 @@ module.exports = {
     SEED: 'secret',
     expiration: '1h'
   },
-  imapConfig: {
-    user: 'quintanasteven60@gmail.com',
-    password: 'nosecomo123',
-    host: 'imap.gmail.com',
-    port: 993, 
-    tls: true,
-  }
 };

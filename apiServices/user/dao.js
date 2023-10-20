@@ -5,17 +5,13 @@ module.exports = {
     return await User.findAll();
   },
 
-  async getUser(data) {
-    return await User.findOne({ where: { email: data.email } });
+  async getUserByEmail(data) {
+    return await User.findOne({ where: { email:data.email } });
   },
 
   async createUsers(data) {
-    const validation = await User.findOne({ where: { email: data.email} });
-    if (!validation){
-     await User.create(data);
-      return true;
-    }
-    else return false;
-   
+    let userValidation = await this.getUserByEmail({ email:data.email });
+    if(userValidation) return false; 
+    return await User.create(data);
   },
 };
