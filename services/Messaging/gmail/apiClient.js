@@ -1,9 +1,7 @@
-const gmailSimulation = require("../../../simulations/gmailSimulation/controller");
-const dto = require("./dto");
+const gmailSimulation = require("../../../simulations/gmailSimulation/dao");
 
 module.exports = {
-  async getMessages(){
-   const gmailMessage = await gmailSimulation.GetMessage();
-   res.status(200).send(dto.multiple(gmailMessage));
+  async getMessages(id_user){
+   return await gmailSimulation.getMessages(id_user);
   } 
 };

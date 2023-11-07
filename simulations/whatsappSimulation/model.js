@@ -1,17 +1,24 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../../services/mysql/sequelize");
+const User = require("../../apiServices/user/model");
 
-const MessageService = sequelize.define(
-    "message_service",
+const WhatsappSimulation = sequelize.define(
+    "whatsapp_simulation",
     {
         id:{
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true
         },
-        addressee:{
-            type: DataTypes.STRING,
-            allowNull: false
+        id_user:{   
+            type: DataTypes.INTEGER,
+            references:{
+                model: "user",
+                key: "id",
+                as: "User",
+                onDelete: "cascade",
+                onUpdate: "cascade"
+            } 
         },
         sender:{
             type: DataTypes.STRING,
@@ -21,11 +28,10 @@ const MessageService = sequelize.define(
             type: DataTypes.STRING,
             allowNull: false
         },
-        bodyMessage:{
+        body_message:{
             type: DataTypes.STRING,
             allowNull: false,
         },
-
     },
     {
       timestamps: false,
@@ -33,4 +39,7 @@ const MessageService = sequelize.define(
     }
 );
 
-module.exports = MessageService;
+User.hasMany(WhatsappSimulation,{foreignKey: "id_user"});
+WhatsappSimulation.belongsTo(User,{foreignKey: "id_user"});
+
+module.exports = WhatsappSimulation;

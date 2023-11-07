@@ -1,10 +1,9 @@
 const apiClient = require("./apiClient");
+const dto = require("./dto");
 
 module.exports = {
   async getMessages(req, res){
-    apiClient.getMessages({
-      email: req.body.email,
-      password: req.body.password
-    })
-  } 
+    const gmailMessage = await apiClient.getMessages(req.token.id); 
+    res.status(200).send(dto.multiple(gmailMessage));
+},
 };

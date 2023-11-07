@@ -1,19 +1,37 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../../services/mysql/sequelize");
+const User = require("../../apiServices/user/model");
 
-const MessageService = sequelize.define(
-    "gmail_simulations",
+const GmailSimulation = sequelize.define(
+    "gmail_simulation",
     {
         id:{
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true
         },
-        name:{
+        id_user:{   
+            type: DataTypes.INTEGER,
+            references:{
+                model: "user",
+                key: "id",
+                as: "User",
+                onDelete: "cascade",
+                onUpdate: "cascade"
+            } 
+        },
+        sender:{
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        sender_contact:{
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        body_message:{
             type: DataTypes.STRING,
             allowNull: false,
-            unique: true
-        }
+        },
     },
     {
       timestamps: false,
@@ -21,4 +39,7 @@ const MessageService = sequelize.define(
     }
 );
 
-module.exports = MessageService;
+User.hasMany(GmailSimulation,{foreignKey: "id_user"});
+GmailSimulation.belongsTo(User,{foreignKey: "id_user"});
+
+module.exports = GmailSimulation;

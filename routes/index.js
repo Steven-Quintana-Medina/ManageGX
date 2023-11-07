@@ -5,10 +5,12 @@ const messageService = require("../apiServices/messageServices/routes");
 const userMessageService = require("../apiServices/userMessageServices/routes");
 
 const gmail = require("../services/Messaging/gmail/routes");
+const whatsapp = require("../services/Messaging/whatsapp/routes");
 
 router.use("/user", user);
 router.use("/login", login);
 router.use("/gmail",gmail);
 router.use("/message-service",messageService);
 router.use("/user-message-service", userMessageService);
+router.use("/whatsapp",whatsapp);
 module.exports = router;
