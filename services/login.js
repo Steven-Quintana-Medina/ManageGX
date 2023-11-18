@@ -25,7 +25,7 @@ router.post("/", async (req, res) => {
       );
 
       res.status(200).send({
-        token: jwtoken
+        token:jwtoken
       });
     } else {
       res.status(400).send({

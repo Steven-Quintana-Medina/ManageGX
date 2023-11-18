@@ -1,0 +1,223 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ManagerGX",
+    "description": "Node.js + Express.js + Mysql",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/api/v1",
+  "schemes": ["http"],
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "Se requiere un token de tipo Bearer para autenticarse."
+    }
+  },
+  "paths": {
+    "/login/": {
+      "post": {
+        "summary": "servicicio de autenticación para verificar la identidad de un usuario",
+        "tags": ["Servicios"],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "quintanasteve@gmail.com"
+                },
+                "password": {
+                  "example": "admin"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Token"
+          },
+          "401": {
+            "description": "invalid user or password"
+          }
+        }
+      }
+    },
+    "/gmail/": {
+      "get": {
+        "summary": "obtiene los mensajes de gmail que tiene un usuario en especifico",
+        "tags": ["Servicios"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "array"
+            }
+          }
+        }
+      }
+    },
+    "/whatsapp/": {
+      "get": {
+        "summary": "obtiene los mensajes de whatsapp que tiene un usuario en especifico",
+        "tags": ["Servicios"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "array"
+            }
+          }
+        }
+      }
+    },
+    "/user/": {
+      "post": {
+        "summary": "crea nuevos usuarios",
+        "tags": ["Users"],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nit": {
+                  "example": "54566456"
+                },
+                "name": {
+                  "exmanple": "monkeys S.A.S"
+                },
+                "email": {
+                  "example": "quintanasteve@gmail.com"
+                },
+                "password": {
+                  "example": "admin"
+                },
+                "rol": {
+                  "example": "admin"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "recourse created"
+          },
+          "409": {
+            "description": "user already exists"
+          }
+        }
+      }
+    },
+    "/message-service/": {
+      "post": {
+        "summary": "registra los nuevos servicios de mensajeria con los que cuenta la api",
+        "tags": ["Gestion de servicios de mensajeria"],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "whatsapp"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "recourse created"
+          },
+          "409": {
+            "description": "existing resource "
+          }
+        }
+      },
+      "get": {
+        "summary": "obtiene todos los servicios de mensajeria con los que cuenta la api",
+        "tags": ["Gestion de servicios de mensajeria"],
+        "responses": {
+          "200": {
+            "response": {
+              "application/json": {
+                "schema": {
+                  "type": "array"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user-message-service/{idMessageService}": {
+      "post": {
+        "summary": "agrega implementación de servicio de mensajeria a un usuario en especifico",
+        "tags": ["Gestion de servicios de mensajeria"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "idMessageService",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "properties": {
+                "idMessageService": {
+                  "example": "1"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "array"
+            }
+          }
+        }
+      }
+    },
+    "/user-message-service/": {
+      "get": {
+        "summary": "obtiene los servicios de mensajeria que tiene un usuario en especifico",
+        "tags": ["Gestion de servicios de mensajeria"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "array"
+            }
+          }
+        }
+      }
+    }
+  }
+}

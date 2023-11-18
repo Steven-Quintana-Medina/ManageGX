@@ -11,7 +11,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/" + config.get("server.api_version"), routes);
+
 app.use(error404Handler);
 app.use(errorHandler);
 
 module.exports = app;
+

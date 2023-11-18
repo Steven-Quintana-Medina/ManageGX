@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "start": "set NODE_ENV=production&& node ./bin/www",
-    "dev": "set NODE_ENV=developer&& nodemon ./bin/www"
+    "dev": "set NODE_ENV=developer&& nodemon ./bin/www",
+    "swagger": "set NODE_ENV=developer&& node ./swagger.js"
   },
   "author": "STEVEN",
   "license": "ISC",
@@ -18,10 +19,13 @@
     "jsonwebtoken": "^8.5.1",
     "multer": "^1.4.5-lts.1",
     "mysql2": "^2.3.3",
-    "sequelize": "^6.21.3"
+    "rm": "^0.1.8",
+    "sequelize": "^6.21.3",
+    "swagger-ui-express": "^5.0.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.19"
+    "nodemon": "^2.0.19",
+    "swagger-autogen": "^2.23.7"
   },
   "description": ""
 }
